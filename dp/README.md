@@ -31,3 +31,31 @@ class Solution {
     }
 }
 ```
+
+## [정수 삼각형](https://school.programmers.co.kr/learn/courses/30/lessons/43105)
+
+```
+import java.util.*;
+
+class Solution {
+    public int solution(int[][] triangle) {
+        int answer = 0;
+        int height = triangle.length;
+        int[][] dp = new int[501][501]; // dp[i][j] := i,j 칸에 도달하기 까지 거쳐온 숫자의 최대 합
+        
+        for(int i = 0 ; i < triangle.length; i++) {
+            for(int j = 0 ; j < triangle[i].length; j++) {
+                dp[i][j] = triangle[i][j];
+            }
+        }
+        
+        for(int i = height-1; i > 0; i--) {
+            int width = triangle[i-1].length;
+            for(int j = 0 ; j < width; j++) {
+                dp[i-1][j] += Math.max(dp[i][j], dp[i][j+1]);
+            }
+        }
+        return dp[0][0];
+    }
+}
+```
