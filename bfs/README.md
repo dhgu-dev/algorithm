@@ -117,3 +117,53 @@ class Solution {
     }
 }
 ```
+
+## [단어 변환](https://school.programmers.co.kr/learn/courses/30/lessons/43163)
+
+```
+import java.util.*;
+
+class Solution {
+    
+    class Node {
+        String word;
+        int dist;
+        
+        public Node(String word, int dist) {
+            this.word = word;
+            this.dist = dist;
+        }
+    }
+    
+    public int solution(String begin, String target, String[] words) {
+        int answer = 0;
+        Queue<Node> q = new LinkedList<>();
+        q.add(new Node(begin, 0));
+        boolean[] visited = new boolean[words.length];
+        
+        while(!q.isEmpty()) {
+            Node cur = q.poll();
+            if(cur.word.equals(target)) {
+                return cur.dist;                
+            }
+            
+            for(String word : words) {
+                int cnt = 0;
+                for(int i = 0 ; i < word.length(); i++) {
+                    if(cur.word.charAt(i) != word.charAt(i)) {
+                        cnt++;
+                    }
+                }
+                
+                int nextWordIdx = Arrays.asList(words).indexOf(word);
+                if(cnt == 1 && !visited[nextWordIdx]) {
+                    visited[nextWordIdx] = true;
+                    q.add(new Node(word, cur.dist + 1));
+                }
+            }
+        }
+        
+        return 0;
+    }
+}
+```
