@@ -33,3 +33,35 @@ class Solution {
     }
 }
 ```
+
+## [네트워크](https://school.programmers.co.kr/learn/courses/30/lessons/43162)
+
+```
+class Solution {
+    
+    boolean[] visited = new boolean[201];
+    
+    public int solution(int n, int[][] computers) {
+        int answer = 0;
+        
+        for(int i = 0 ; i < n; i++) {
+            if(!visited[i]) {
+                solve(i, n, computers);
+                answer++;
+            }
+        }
+        
+        return answer;
+    }
+    
+    public void solve(int node, int n, int[][] computers) {
+        visited[node] = true;
+        
+        for(int nxt = 0; nxt < n; nxt++) {
+            if(computers[node][nxt] == 1 && !visited[nxt]) {
+                solve(nxt, n, computers);
+            }
+        }
+    }
+}
+```
