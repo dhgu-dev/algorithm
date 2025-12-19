@@ -68,3 +68,33 @@ class Solution {
     }
 }
 ```
+
+## [이중우선순위큐](https://school.programmers.co.kr/learn/courses/30/lessons/42628)
+
+```
+import java.util.*;
+
+class Solution {
+    public int[] solution(String[] operations) {
+        PriorityQueue<Integer> minpq = new PriorityQueue<>();
+        PriorityQueue<Integer> maxpq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for(String op : operations) {
+            if(op.startsWith("I ")) {
+                int n = Integer.parseInt(op.substring(2));
+                minpq.add(n);
+                maxpq.add(n);
+            } else if(!minpq.isEmpty() && op.equals("D -1")) {
+                maxpq.remove(minpq.poll());
+            } else if(!maxpq.isEmpty() && op.equals("D 1")) {
+                minpq.remove(maxpq.poll());
+            }
+        }
+        
+        if(minpq.isEmpty() && maxpq.isEmpty()) {
+            return new int[]{0, 0};
+        }
+        return new int[]{ maxpq.poll(), minpq.poll() };
+    }
+}
+```
