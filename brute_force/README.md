@@ -26,3 +26,44 @@ public class Main {
     }
 }
 ```
+
+## [Farm](https://www.acmicpc.net/problem/16283)
+
+```
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String line = br.readLine();
+        
+        StringTokenizer st = new StringTokenizer(line);
+
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int W = Integer.parseInt(st.nextToken());
+
+        String result = "";
+        for (int x = 1; x < N; x++) {
+            int cost = x * A + (N - x) * B;
+            if (cost == W) {
+                if (!result.equals("")) {
+                    System.out.print(-1);
+                    return;
+                }
+                result = x + " " + (N - x);
+            }
+        }
+
+        if (result.equals("")) {
+            System.out.print(-1);
+            return;
+        }
+
+        System.out.print(result);
+    }
+}
+```
