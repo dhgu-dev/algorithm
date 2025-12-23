@@ -102,3 +102,31 @@ public class Main {
     }
 }
 ```
+
+## [2017 연세대학교 프로그래밍 경시대회](https://www.acmicpc.net/problem/14568)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
+        int N = Integer.parseInt(line);
+
+        int cnt = 0;
+        for (int i = 1; i < N; i++) {
+            if (i % 2 != 0) continue;
+            for (int j = 1; j < N; j++) {
+                if (N - i - j <= 0) continue;
+                if (j + 2 <= N - i - j) {
+                    cnt++;
+                }
+            }
+        }
+
+        System.out.println(cnt);
+    }
+}
+```
