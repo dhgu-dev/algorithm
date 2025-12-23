@@ -1,8 +1,8 @@
 # Brute Force
 
-## [통학의 신](https://www.acmicpc.net/problem/17945) 
+## [통학의 신](https://www.acmicpc.net/problem/17945)
 
-```
+```java
 import java.io.*;
 import java.util.*;
 
@@ -29,7 +29,7 @@ public class Main {
 
 ## [Farm](https://www.acmicpc.net/problem/16283)
 
-```
+```java
 import java.io.*;
 import java.util.*;
 
@@ -64,6 +64,41 @@ public class Main {
         }
 
         System.out.print(result);
+    }
+}
+```
+
+## [일곱 난쟁이](https://www.acmicpc.net/problem/2309)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[] arr = new int[9];
+        int sum = 0;
+        for (int i = 0; i < 9; i++) {
+            String line = br.readLine();
+            arr[i] = Integer.parseInt(line);
+            sum += arr[i];
+        }
+
+        Arrays.sort(arr);
+
+        for (int i = 0; i < 9; i++) {
+            for(int j = i+1; j < 9; j++) {
+                if (sum - arr[i] - arr[j] == 100) {
+                    for (int k = 0 ; k < 9; k++) {
+                        if (k == i || k == j) continue;
+                        System.out.println(arr[k]);
+                    }
+                    return;
+                }
+            }
+        }
     }
 }
 ```
