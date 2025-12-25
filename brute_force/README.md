@@ -130,3 +130,29 @@ public class Main {
     }
 }
 ```
+
+## [완전 제곱수](https://www.acmicpc.net/problem/6131)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
+        int N = Integer.parseInt(line);
+
+        int cnt = 0;
+        for (int a = 1; a <= 500; a++) {
+            for (int b = 1; b <= 500; b++) {
+                if (a * a == b * b + N) {
+                    cnt++;
+                }
+            }
+        }
+
+        System.out.println(cnt);
+    }
+}
+```
