@@ -156,3 +156,33 @@ public class Main {
     }
 }
 ```
+
+## [대회 or 인턴](https://www.acmicpc.net/problem/2875)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
+        StringTokenizer st = new StringTokenizer(line);
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        int ans = 0;
+        for (int i = 0; i <= K; i++) {
+            int female = N - i;
+            int male = M - (K - i);
+            if (female <= 0 || male <= 0) continue; 
+            int teams = Math.min(female / 2, male);
+            ans = Math.max(ans, teams);
+        }
+
+        System.out.println(ans);
+    }
+}
+```
