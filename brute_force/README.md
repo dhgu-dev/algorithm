@@ -186,3 +186,35 @@ public class Main {
     }
 }
 ```
+
+## [슈퍼 마리오](https://www.acmicpc.net/problem/2851)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[] arr = new int[11];
+        
+        for (int i = 0; i < 10; i++) {
+            String line = br.readLine();
+            arr[i] = Integer.parseInt(line);
+        }
+
+        int ans = 0;
+        for (int i = 1; i <= 10; i++) {
+            int score = 0;
+            for(int j = 0; j < i; j++) {
+                score += arr[j];
+            }
+            int cur = Math.abs(100 - score);
+            int prev = Math.abs(100 - ans);
+            if (cur <= prev) ans = score;
+        }
+        System.out.println(ans);
+    }
+}
+```
