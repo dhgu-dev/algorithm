@@ -252,3 +252,63 @@ public class Main {
     }
 }
 ```
+
+## [적어도 대부분의 배수](https://www.acmicpc.net/problem/1145)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static int[] pick = new int[5];
+    public static int[] arr = new int[5];
+    public static int ans = 100 * 100 * 100;
+
+    public static int gcd(int a, int b) {
+        while(a % b != 0) {
+            int temp = a % b;
+            a = b;
+            b = temp;
+        }
+        return b;
+    }
+
+    public static int lcd(int a, int b) {
+        return a * b / gcd(a, b);
+    }
+
+    public static void btrk(int cnt, int idx) {
+        if (cnt == 3) {
+            int result = 1;
+            for (int i = 0 ; i < 5; i++) {
+                if(pick[i] != 0) result = lcd(result, arr[i]);
+            }
+            ans = Math.min(ans, result);
+        }
+
+        for (int i = idx; i < 5; i++) {
+            if(pick[i] == 0) {
+                pick[i] = 1;
+                btrk(cnt + 1, idx + 1);
+                pick[i] = 0;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String line = br.readLine();
+        StringTokenizer st = new StringTokenizer(line);
+
+        for (int i = 0 ; i < 5; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        
+        btrk(0, 0);
+
+        System.out.println(ans);
+    }
+}
+```
