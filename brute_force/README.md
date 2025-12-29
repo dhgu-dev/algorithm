@@ -312,3 +312,35 @@ public class Main {
     }
 }
 ```
+
+## [수학은 비대면강의입니다](https://www.acmicpc.net/problem/19532)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String line = br.readLine();
+        StringTokenizer st = new StringTokenizer(line);
+
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int C = Integer.parseInt(st.nextToken());
+        int D = Integer.parseInt(st.nextToken());
+        int E = Integer.parseInt(st.nextToken());
+        int F = Integer.parseInt(st.nextToken());
+
+        for (int x = -999 ; x <= 999 ; x++) {
+            for (int y = -999 ; y <= 999 ; y++) {
+                if(A * x + B * y == C && D * x + E * y == F) {
+                    System.out.println(x + " " + y);
+                    return;
+                }
+            }
+        }
+    }
+}
+```
