@@ -344,3 +344,47 @@ public class Main {
     }
 }
 ```
+
+## [Lifeguards (Bronze)](https://www.acmicpc.net/problem/15593)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+
+        int[][] lifeguards = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            lifeguards[i][0] = Integer.parseInt(st.nextToken());
+            lifeguards[i][1] = Integer.parseInt(st.nextToken());
+        }
+
+        int maxCover = 0;
+
+        // 1명씩 제외하면서 남은 구조요원들의 커버 시간 계산
+        for (int remove = 0; remove < n; remove++) {
+            boolean[] covered = new boolean[1001]; // 시간 범위는 0~1000
+            for (int i = 0; i < n; i++) {
+                if (i == remove) continue; // 제외
+                int start = lifeguards[i][0];
+                int end = lifeguards[i][1];
+                for (int t = start; t < end; t++) {
+                    covered[t] = true;
+                }
+            }
+            // 커버된 총 시간 계산
+            int count = 0;
+            for (int t = 0; t <= 1000; t++) {
+                if (covered[t]) count++;
+            }
+            maxCover = Math.max(maxCover, count);
+        }
+
+        System.out.println(maxCover);
+    }
+}
+```
