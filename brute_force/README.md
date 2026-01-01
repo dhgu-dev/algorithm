@@ -388,3 +388,41 @@ public class Main {
     }
 }
 ```
+
+## [색종이](https://www.acmicpc.net/problem/2563)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+
+        int[][] maps = new int[101][101];
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int sx = Integer.parseInt(st.nextToken());
+            int sy = Integer.parseInt(st.nextToken());
+
+            for(int y = sy; y < sy + 10; y++) {
+                for(int x = sx; x < sx + 10; x++) {
+                    if (y < 0 || x < 0 || y > 100 || x > 100) continue;
+                    maps[y][x] = 1;
+                }
+            }
+        }
+
+        int ans = 0;
+
+        for(int i = 0 ; i <= 100 ; i++) {
+            for(int j = 0 ; j <= 100 ; j++) {
+                if(maps[i][j] == 1) ans++;
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+```
