@@ -426,3 +426,70 @@ public class Main {
     }
 }
 ```
+
+## [숫자 야구](https://www.acmicpc.net/problem/2503)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+
+        int[] candidates = new int[1001];
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int nums = Integer.parseInt(st.nextToken());
+            int strike = Integer.parseInt(st.nextToken());
+            int ball = Integer.parseInt(st.nextToken());
+
+            int[] query = new int[]{nums / 100, (nums % 100) / 10, nums % 10};
+
+            for (int j = 123 ; j < 1000; j++) {
+                Set<Integer> uniq = new HashSet<Integer>();
+                uniq.add(j / 100);
+                uniq.add((j % 100) / 10);
+                uniq.add((j % 10));
+
+                if (uniq.size() != 3 || uniq.contains(0)) {
+                    // 서로 다른 3자리 수가 아니면 정답 후보가 될 수 없으므로 1로 기록해 놓는다
+                    candidates[j] = 1; 
+                    continue;
+                }
+
+                int[] candidate = new int[]{j / 100, (j % 100) / 10, j % 10};
+
+                int strikeCnt = 0;
+                int ballCnt = 0;
+
+                for (int q = 0 ; q < 3; q++) {
+                    for (int c = 0 ; c < 3 ; c++) {
+                        if(query[q] == candidate[c]) {
+                            if(q == c) strikeCnt++;
+                            else ballCnt++;
+                        }
+                    }
+                }
+
+                if(!(strikeCnt == strike && ballCnt == ball)) {
+                    // 정답 후보가 될 수 없으므로 1로 기록해 놓는다
+                    candidates[j] = 1;
+                }
+            }
+        }
+
+        int ans = 0;
+
+        for(int i = 123 ; i < 1000 ; i++) {
+            if(candidates[i] == 0) ans++;
+        }
+
+        System.out.println(ans);
+    }
+}
+```
