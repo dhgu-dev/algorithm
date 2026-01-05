@@ -493,3 +493,32 @@ public class Main {
     }
 }
 ```
+
+## [암호 키](https://www.acmicpc.net/problem/1816)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+
+        for (int i = 0; i < n; i++) {
+            long input = Long.parseLong(br.readLine());
+
+            String ans = "YES";
+            for (int j = 2; j <= 1000000; j++) {
+                if(input % j == 0) {
+                    ans = "NO";
+                    break;
+                }
+            }
+
+            System.out.println(ans);
+        }
+    }
+}
+```
