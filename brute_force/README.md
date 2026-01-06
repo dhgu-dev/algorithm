@@ -522,3 +522,41 @@ public class Main {
     }
 }
 ```
+
+## [삼삼한 수](https://www.acmicpc.net/problem/17252)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine().trim());
+
+        long[] arr = new long[20];
+        long sam = 1;
+        arr[0] = sam;
+
+        for(int i = 1; i < 20; i++) {
+            sam *= 3;
+            arr[i] = sam;
+        }
+
+        boolean ans = solve(0, arr, 0L, n);
+        if (ans) System.out.println("YES");
+        else System.out.println("NO");
+    }
+
+    public static boolean solve(int cur, long[] arr, long acc, int x) {
+        if (acc > x || x == 0) return false;
+
+        if(cur == 20) {
+            return acc == x;
+        }
+
+        return solve(cur+1, arr, acc + arr[cur], x) || solve(cur+1, arr, acc, x);
+    }
+}
+```
