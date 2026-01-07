@@ -609,3 +609,69 @@ public class Main {
     }
 }
 ```
+
+## [오목, 이길 수 있을까?](https://www.acmicpc.net/problem/16955)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static char[][] board = new char[10][10];
+    static boolean found = false;
+
+    static int[] dx = {0, 1, 1, 1};
+    static int[] dy = {1, 0, 1, -1};
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i = 0; i < 10; i++) {
+            board[i] = br.readLine().toCharArray();
+        }
+
+        backtrack();
+        System.out.println(found ? 1 : 0);
+    }
+
+    static void backtrack() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (board[i][j] != '.') continue;
+
+                board[i][j] = 'X';
+
+                if (check(i, j)) {
+                    found = true;
+                    return;
+                }
+
+                board[i][j] = '.';
+            }
+        }
+    }
+
+    static boolean check(int x, int y) {
+        for (int d = 0; d < 4; d++) {
+            int cnt = 1;
+            cnt += count(x, y, dx[d], dy[d]);
+            cnt += count(x, y, -dx[d], -dy[d]);
+            if (cnt >= 5) return true;
+        }
+        return false;
+    }
+
+    static int count(int x, int y, int dx, int dy) {
+        int cnt = 0;
+        for (int i = 1; i < 5; i++) {
+            int nx = x + dx * i;
+            int ny = y + dy * i;
+            if (nx < 0 || ny < 0 || nx >= 10 || ny >= 10) break;
+            if (board[nx][ny] != 'X') break;
+            cnt++;
+        }
+        return cnt;
+    }
+}
+```
