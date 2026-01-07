@@ -560,3 +560,52 @@ public class Main {
     }
 }
 ```
+
+## [사탕 박사 고창영](https://www.acmicpc.net/problem/2508)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine().trim());
+
+        for (int tc = 0 ; tc < t ; tc++) {
+            br.readLine();
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int r = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            char[][] maps = new char[r+1][c+1];
+            for(int i = 0; i < r; i++){
+                String line = br.readLine();
+                for(int j = 0; j < c; j++) {
+                    maps[i][j] = line.charAt(j);
+                }
+            }
+
+            int ans = 0;
+            for(int i = 0; i < r; i++) {
+                for(int j = 0; j < c; j++) {
+                    if(maps[i][j] == 'o') {
+                        if(
+                            (i-1 >= 0 && i+1 < r) 
+                            && (maps[i-1][j] == 'v' && maps[i+1][j] == '^')
+                        ) { ans++; }
+                        if(
+                            (j-1 >= 0 && j+1 < c) 
+                            && (maps[i][j-1] == '>' && maps[i][j+1] == '<')
+                        ) { ans++; }
+                    }
+                }
+            }
+
+            System.out.println(ans);
+        }
+    }
+}
+```
