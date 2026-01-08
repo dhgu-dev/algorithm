@@ -675,3 +675,70 @@ public class Main {
     }
 }
 ```
+
+## [유미](https://www.acmicpc.net/problem/17286)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static List<int[]> points = new ArrayList<>();
+    static int[][] pick = new int[4][2];
+    static boolean[] visited = new boolean[4];
+    static double ans = Double.MAX_VALUE;
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i = 0; i < 4; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+
+            points.add(new int[]{ x, y });
+        }
+
+        pick[0][0] = points.get(0)[0];
+        pick[0][1] = points.get(0)[1];
+        visited[0] = true;
+        
+        backtrack(1);
+       
+        System.out.println((int)ans);
+    }
+
+    static void backtrack(int cnt) {
+        if (cnt == 4) {
+            double result = 0;
+            for (int i = 1; i < 4; i++) {
+                int x1 = pick[i-1][0];
+                int y1 = pick[i-1][1];
+                int x2 = pick[i][0];
+                int y2 = pick[i][1];
+                result += dist(x1, y1, x2, y2);
+            }
+            ans = Math.min(ans, result);
+            return;
+        }
+
+        for (int i = 1; i < 4; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                int x = points.get(i)[0];
+                int y = points.get(i)[1];
+                pick[cnt][0] = x;
+                pick[cnt][1] = y;
+                backtrack(cnt+1);
+                visited[i] = false;
+            }
+        }
+    }
+
+    static double dist(int x1, int y1, int x2, int y2) {
+        return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    }
+}
+```
