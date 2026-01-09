@@ -742,3 +742,132 @@ public class Main {
     }
 }
 ```
+
+## [시계](https://www.acmicpc.net/problem/2082)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static char[][][] clock = new char[4][5][3];
+    static final char[][][] NUMBERS = {
+        // 0
+        {
+            {'#', '#', '#'},
+            {'#', '.', '#'},
+            {'#', '.', '#'},
+            {'#', '.', '#'},
+            {'#', '#', '#'}
+        },
+        // 1
+        {
+            {'.', '.', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'}
+        },
+        // 2
+        {
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'#', '#', '#'},
+            {'#', '.', '.'},
+            {'#', '#', '#'}
+        },
+        // 3
+        {
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'#', '#', '#'}
+        },
+        // 4
+        {
+            {'#', '.', '#'},
+            {'#', '.', '#'},
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'}
+        },
+        // 5
+        {
+            {'#', '#', '#'},
+            {'#', '.', '.'},
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'#', '#', '#'}
+        },
+        // 6
+        {
+            {'#', '#', '#'},
+            {'#', '.', '.'},
+            {'#', '#', '#'},
+            {'#', '.', '#'},
+            {'#', '#', '#'}
+        },
+        // 7
+        {
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'},
+            {'.', '.', '#'}
+        },
+        // 8
+        {
+            {'#', '#', '#'},
+            {'#', '.', '#'},
+            {'#', '#', '#'},
+            {'#', '.', '#'},
+            {'#', '#', '#'}
+        },
+        // 9
+        {
+            {'#', '#', '#'},
+            {'#', '.', '#'},
+            {'#', '#', '#'},
+            {'.', '.', '#'},
+            {'#', '#', '#'}
+        }
+    };
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        for (int i = 0; i < 5; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            
+            for (int j = 0 ; j < 4; j++) {
+                String x = st.nextToken();
+                for(int k = 0 ; k < 3; k++) {
+                    clock[j][i][k] = x.charAt(k);
+                }
+            }
+        }
+
+        for(int pos = 0; pos < 4; pos++) {
+            for(int k = 0; k < 10; k++) {
+                boolean isMatch = true;
+                for(int i = 0 ; i < 5; i++) {
+                    for(int j = 0; j < 3; j++) {
+                        char number = NUMBERS[k][i][j];
+                        char input = clock[pos][i][j];
+                        if(input == '#' && number == '.') {
+                            isMatch = false;
+                        }
+                    }
+                }
+                if (isMatch) {
+                    System.out.print(k);
+                    break;
+                }
+            }
+            if(pos == 1) System.out.print(':');
+        }
+    }
+}
+```
