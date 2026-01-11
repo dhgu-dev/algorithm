@@ -923,3 +923,60 @@ public class Main {
     }
 }
 ```
+
+## [창고 다각형](https://www.acmicpc.net/problem/2304)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int n = Integer.parseInt(br.readLine());
+        int[][] arr = new int[n][2];
+
+        for (int i = 0; i < n; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            arr[i][0] = Integer.parseInt(st.nextToken()); // L
+            arr[i][1] = Integer.parseInt(st.nextToken()); // H
+        }
+
+        Arrays.sort(arr, Comparator.comparingInt(a -> a[0]));
+
+        int maxIdx = 0;
+        for (int i = 1; i < n; i++) {
+            if (arr[i][1] > arr[maxIdx][1]) {
+                maxIdx = i;
+            }
+        }
+
+        int ans = 0;
+
+        // 왼쪽 → 최대 기둥
+        int height = arr[0][1];
+        int prevL = arr[0][0];
+        for (int i = 1; i <= maxIdx; i++) {
+            ans += (arr[i][0] - prevL) * height;
+            height = Math.max(height, arr[i][1]);
+            prevL = arr[i][0];
+        }
+
+        // 오른쪽 → 최대 기둥
+        height = arr[n - 1][1];
+        prevL = arr[n - 1][0];
+        for (int i = n - 2; i >= maxIdx; i--) {
+            ans += (prevL - arr[i][0]) * height;
+            height = Math.max(height, arr[i][1]);
+            prevL = arr[i][0];
+        }
+
+        // 최대 기둥 자체
+        ans += arr[maxIdx][1];
+
+        System.out.println(ans);
+    }
+}
+```
