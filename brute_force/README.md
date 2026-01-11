@@ -871,3 +871,55 @@ public class Main {
     }
 }
 ```
+
+## [반복하지 않는 수](https://www.acmicpc.net/problem/7696)
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int[] ck = new int[10];
+        int[] answers = new int[1000001];
+        int candidate = 1;
+        int cnt = 1;
+        while(cnt <= 1000000) {
+            int cur = candidate;
+            boolean isNonRecurNumber = true;
+
+            while(cur > 0) {
+                int digit = cur % 10;
+                if (ck[digit] >= 1) {
+                    isNonRecurNumber = false;
+                    break;
+                }
+                ck[digit]++;
+                cur /= 10;
+            }
+
+            if (isNonRecurNumber) {
+                answers[cnt] = candidate;
+                cnt++;
+            }
+
+            candidate++;
+            for (int i = 0 ; i < 10; i++) {
+                ck[i] = 0;
+            }
+        }
+
+        while (true) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+
+            int n = Integer.parseInt(st.nextToken());
+            if(n == 0) break;
+
+            System.out.println(answers[n]);
+        }
+    }
+}
+```
